@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				var e = document.getElementById("nivel");
+				var nivel = e.options[e.selectedIndex].value;
+				var API = 'http://127.0.0.1:8000/alumnos/';
+				var JSON = API.concat(nivel);
+				$.getJSON(JSON, { get_param: 'value' }, function(data) {
+					$.each(data, function(index, element) {						
+						$('body').append( 
+							'<div>' + element.Nombre + ' ' + element.Apellido + '</div>'
+							);
+					});
+				});
+			});
+		});
+	</script>
+</style>
+</head>
+<body>
+	<select id="nivel">
+		<option value="1">Nivel 1</option>
+		<option value="2">Nivel 2</option>
+		<option value="3">Nivel 3</option>
+	</select>
+	<div>
+		<button>Obtener alumnos</button>
+	</div>
+
+</body>
+
+</html>
